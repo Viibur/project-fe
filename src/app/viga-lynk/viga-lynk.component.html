@@ -1,0 +1,34 @@
+<div>
+  <div class="keskeleYlemine">
+    {{ getLauseFirstHalf() }} _____ {{ getLauseSecondHalf() }}
+  </div>
+  <div class="keskeleKeskmine">
+    <button class="btn btn-secondary m-1"
+            (click)="button1Click()"
+            [disabled]="kasArvatud">
+      {{ button1Text }}
+    </button>
+    <button class="btn btn-secondary m-1"
+            (click)="button2Click()"
+            [disabled]="kasArvatud">
+      {{ button2Text }}
+    </button>
+  </div>
+  <div class="keskeleAlumine" *ngIf="kasArvatud">
+    <div>
+      <h2 *ngIf="proovid == 1">Tubli!</h2>
+      <h2 *ngIf="proovid == 0">Järgmnine kord läheb paremini!</h2>
+    </div>
+    <div>
+      <button [class]="proovid == 1 ? 'btn btn-success' : 'btn btn-danger'" (click)="next()">Järgmine lause</button>
+    </div>
+  </div>
+</div>
+
+<div class="sonaveeb">
+    <a *ngIf="proovid == 0" [href]="getLink()" target="_blank">Link sõnaveebi</a>
+</div>
+<div class="sonaveeb">
+    <a *ngIf="proovid == 0 && viga.korrektne.split(' ').length > 1" [href]="getLink2()" target="_blank">Link sõnaveebi
+      teise sõna jaoks </a>
+</div>

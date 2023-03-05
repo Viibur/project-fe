@@ -1,0 +1,30 @@
+<div>
+  <div class="keskeleYlemine">
+    {{ viga.lause }}
+  </div>
+  <div class="keskeleKeskmine">
+    <input [ngClass]="proovid < 3 ? 'border-red' : ''"
+           [(ngModel)]="vastus"/>
+    <button class="btn btn-secondary" (keydown.enter)="checkVastus()"
+            (click)="checkVastus()"
+            [disabled]="oigsus">Kontrolli
+    </button>
+  </div>
+  <div class="keskeleAlumine" *ngIf="oigsus">
+    <div>
+      <h2>Tubli!</h2>
+    </div>
+    <div>
+      <button class="btn btn-success" (click)="next()">Järgmine lause</button>
+    </div>
+  </div>
+</div>
+
+<div class="sonaveeb">
+  <span> {{ hint }} </span>
+  <a *ngIf="proovid == 0" [href]="getLink()" target="_blank">Link sõnaveebi</a>
+</div>
+<div class="sonaveeb">
+  <a *ngIf="proovid == 0 && viga.korrektne.split(' ').length > 1" [href]="getLink2()" target="_blank">Link sõnaveebi
+    teise sõna jaoks </a>
+</div>

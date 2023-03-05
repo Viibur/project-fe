@@ -1,0 +1,23 @@
+<button class="btn btn-secondary infoHelper" (click)="openModal()">Info</button>
+<div class="switchButtons">
+  <button class="btn btn-primary w-25"
+          [disabled]="vigaKirjuta"
+          (click)="changeClicked()">Kirjuta sõna korrektselt
+  </button>
+  <button class="btn btn-primary w-25"
+          [disabled]="vigaLynk"
+          (click)="changeClicked()">Vali õige sõna
+  </button>
+</div>
+<span class="oiged display-6"> {{ oige }}/{{ kokku }}</span>
+<app-viga-kirjuta *ngIf="vigaKirjuta"
+                  [viga]="viga"
+                  (parandatud)="findNextViga($event)"
+                  (isStreak)="maaraStreak($event)"
+                  (valedParandused)="lisaValeParandus($event)"></app-viga-kirjuta>
+<app-viga-lynk *ngIf="vigaLynk"
+               [viga]="viga"
+               (parandatud)="findNextViga($event)"
+               (isStreak)="maaraStreak($event)"
+               (valedParandused)="lisaValeParandus($event)"></app-viga-lynk>
+
