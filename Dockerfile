@@ -1,5 +1,5 @@
 FROM node:latest as node
-WORKDIR /app
+WORKDIR /project-be
 COPY . .
 RUN npm install
 RUN npm run build --prod
