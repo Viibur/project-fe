@@ -2,7 +2,7 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
-  EventEmitter,
+  EventEmitter, HostListener,
   Input,
   OnChanges, OnDestroy,
   Output,

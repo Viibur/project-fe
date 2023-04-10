@@ -42,12 +42,12 @@ export class AppComponent implements OnInit, OnDestroy {
     if (this.valedParandused.length == 0) {
       return;
     }
-    this.http.post<void>("https://loputoobe-production.up.railway.app//uuenda_naited", this.valedParandused).subscribe();
+    this.http.post<void>("https://projectbe-production.up.railway.app/muuda_andmed", this.valedParandused).subscribe();
   }
 
   ngOnInit(): void {
     this.initSubscriptions();
-    this.http.get<VeanaideDTO[]>("https://loputoobe-production.up.railway.app//naited").subscribe((vead: VeanaideDTO[]) => {
+    this.http.get<VeanaideDTO[]>("https://projectbe-production.up.railway.app/andmed").subscribe((vead: VeanaideDTO[]) => {
       this.vead = vead;
       this.findViga(this.vead.length);
     });
@@ -61,10 +61,10 @@ export class AppComponent implements OnInit, OnDestroy {
   findViga(pikkus: number): void {
     if (pikkus > 0) {
       if (this.vead.length > 5) {
-        let abiList: VeanaideDTO[] = this.vead.slice(this.vead.length-5, this.vead.length);
+        let abiList: VeanaideDTO[] = this.vead.slice(this.vead.length - 5, this.vead.length);
         abiList.sort(() => Math.random() - 0.5)
         let mitmes: number = 0;
-        for (let i = this.vead.length-4; i < this.vead.length; i++) {
+        for (let i = this.vead.length - 4; i < this.vead.length; i++) {
           this.vead[i] = abiList[mitmes];
           mitmes += 1;
         }
@@ -94,7 +94,7 @@ export class AppComponent implements OnInit, OnDestroy {
         pikkus = Math.floor(pikkus - pikkus * (this.streak / 10));
       }
       this.findViga(pikkus);
-      this.lugerService.kokku$.next(this.lugerService.kokku$.value+1);
+      this.lugerService.kokku$.next(this.lugerService.kokku$.value + 1);
     }
   }
 
@@ -124,5 +124,11 @@ export class AppComponent implements OnInit, OnDestroy {
   initSubscriptions(): void {
     this.subscriptions.push(this.lugerService.oige$.subscribe(oige => this.oige = oige));
     this.subscriptions.push(this.lugerService.kokku$.subscribe(kokku => this.kokku = kokku))
+  }
+
+  raporteeri(): void {
+    this.http.get("https://projectbe-production.up.railway.app/raporteeri/" + this.viga.id).subscribe(result => {
+      this.findNextViga(true);
+    });
   }
 }
