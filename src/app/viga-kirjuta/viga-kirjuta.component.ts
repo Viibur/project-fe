@@ -1,7 +1,7 @@
 import {
   AfterViewInit,
   Component,
-  EventEmitter,
+  EventEmitter, HostListener,
   Input,
   OnChanges,
   OnDestroy,
@@ -70,9 +70,6 @@ export class VigaKirjutaComponent implements OnInit, OnChanges {
       return;
     }
     this.isStreak.emit(false);
-    if (this.proovid <= 0) {
-
-    }
 
     if (this.vastus.toLowerCase() == this.viga.korrektne.toLowerCase()) {
       this.hint = "Kapitalisatsioon!"
@@ -87,5 +84,12 @@ export class VigaKirjutaComponent implements OnInit, OnChanges {
 
   getLink2(): string {
     return "https://sonaveeb.ee/search/unif/dlall/dsall/" + this.viga.korrektne.split(' ')[1] + "/1";
+  }
+
+  @HostListener('document:keyup.enter', ['$event'])
+  clickedEnter(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      this.checkVastus();
+    }
   }
 }

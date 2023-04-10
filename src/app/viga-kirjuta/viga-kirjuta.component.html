@@ -5,7 +5,7 @@
   <div class="keskeleKeskmine">
     <input [ngClass]="proovid < 3 ? 'border-red' : ''"
            [(ngModel)]="vastus"/>
-    <button class="btn btn-secondary" (keydown.enter)="checkVastus()"
+    <button [ngClass]="proovid < 3 ? 'btn btn-danger' : 'btn btn-secondary'"
             (click)="checkVastus()"
             [disabled]="oigsus">Kontrolli
     </button>

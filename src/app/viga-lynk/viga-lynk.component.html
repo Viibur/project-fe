@@ -16,8 +16,8 @@
   </div>
   <div class="keskeleAlumine" *ngIf="kasArvatud">
     <div>
-      <h2 *ngIf="proovid == 1">Tubli!</h2>
-      <h2 *ngIf="proovid == 0">Järgmnine kord läheb paremini!</h2>
+      <h2 *ngIf="proovid == 1">Tubli! </h2>
+      <h2 *ngIf="proovid == 0">Järgmine kord läheb paremini! </h2>
     </div>
     <div>
       <button [class]="proovid == 1 ? 'btn btn-success' : 'btn btn-danger'" (click)="next()">Järgmine lause</button>
@@ -26,9 +26,8 @@
 </div>
 
 <div class="sonaveeb">
-    <a *ngIf="proovid == 0" [href]="getLink()" target="_blank">Link sõnaveebi</a>
+    <a *ngIf="proovid == 0" [href]="getLink()" target="_blank">Vigase sõna sõnaveebi link</a>
 </div>
 <div class="sonaveeb">
-    <a *ngIf="proovid == 0 && viga.korrektne.split(' ').length > 1" [href]="getLink2()" target="_blank">Link sõnaveebi
-      teise sõna jaoks </a>
+    <a *ngIf="proovid == 0 && viga.korrektne.split(' ').length > 1" [href]="getLink2()" target="_blank">Teise sõnapoole sõnaveebi link</a>
 </div>
