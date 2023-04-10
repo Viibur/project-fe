@@ -98,6 +98,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   lisaValeParandus($event: VeanaideDTO) {
+    $event.sagedus = $event.sagedus + 1;
     this.http.post<void>("https://projectbe-production.up.railway.app/muuda_andmed", [$event]).subscribe();
   }
 
