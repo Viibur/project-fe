@@ -1,4 +1,4 @@
-import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {VeanaideDTO} from "./model/interface.model";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
@@ -22,6 +22,7 @@ export class AppComponent implements OnInit, OnDestroy {
   };
   // BEst tulevad vead
   vead!: VeanaideDTO[];
+  valestiParandatud: VeanaideDTO[] = [];
   streak: number = 0;
   vigaLynk: boolean = false;
   vigaKirjuta: boolean = true;
@@ -98,8 +99,11 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   lisaValeParandus($event: VeanaideDTO) {
-    $event.sagedus = $event.sagedus + 1;
-    this.http.post<void>("https://projectbe-production.up.railway.app/muuda_andmed", [$event]).subscribe();
+    if (this.valestiParandatud.filter(viga => viga.id == $event.id).length == 0) {
+      $event.sagedus = $event.sagedus + 1;
+      this.http.post<void>("https://projectbe-production.up.railway.app/muuda_andmed", [$event]).subscribe();
+    }
+    this.valestiParandatud.push($event);
   }
 
   changeClicked(): void {
