@@ -22,8 +22,6 @@ export class AppComponent implements OnInit, OnDestroy {
   };
   // BEst tulevad vead
   vead!: VeanaideDTO[];
-  // Valed parandused, sageduse suurendamiseks
-  valedParandused: VeanaideDTO[] = [];
   streak: number = 0;
   vigaLynk: boolean = false;
   vigaKirjuta: boolean = true;
@@ -34,15 +32,6 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(private http: HttpClient,
               private modalService: NgbModal,
               private lugerService: LugerService) {
-  }
-
-  //https://stackoverflow.com/questions/46848628/how-can-i-use-hostlistenerwindowbeforeunload-to-call-a-method
-  @HostListener('window:beforeunload', ['$event'])
-  beforeUnloadHander(event: any): void {
-    if (this.valedParandused.length == 0) {
-      return;
-    }
-    this.http.post<void>("https://projectbe-production.up.railway.app/muuda_andmed", this.valedParandused).subscribe();
   }
 
   ngOnInit(): void {
@@ -109,10 +98,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   lisaValeParandus($event: VeanaideDTO) {
-    if (this.valedParandused.filter(parandus => parandus.id == $event.id) == null) {
-      $event.sagedus = $event.sagedus + 1;
-      this.valedParandused.push($event);
-    }
+    this.http.post<void>("https://projectbe-production.up.railway.app/muuda_andmed", [$event]).subscribe();
   }
 
   changeClicked(): void {
