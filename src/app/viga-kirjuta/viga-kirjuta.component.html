@@ -10,12 +10,15 @@
             [disabled]="oigsus">Kontrolli
     </button>
   </div>
-  <div class="keskeleAlumine" *ngIf="oigsus">
-    <div>
-      <h2>Tubli! </h2>
+  <div class="keskeleAlumine">
+    <div *ngIf="oigsus && proovid > 0" class="row">
+      <h2>Tubli!</h2>
     </div>
-    <div>
-      <button class="btn btn-success" (click)="next()">Järgmine lause </button>
+    <div *ngIf="!oigsus && proovid <= 0" class="row">
+      <h2>Järgmine kord läheb paremini!</h2>
+    </div>
+    <div *ngIf="oigsus || proovid <= 0" class="row">
+      <button [class]="proovid > 0 ? 'btn btn-success' : 'btn btn-danger'" (click)="next()">Järgmine lause</button>
     </div>
   </div>
 </div>

@@ -12,7 +12,8 @@
 
 .keskeleAlumine {
   justify-content: center;
-  display: flex;
+  display: grid;
+  place-items: center;
   padding-top: 20px;
 }
 
@@ -25,4 +26,3 @@
 .border-red {
   border-color: red;
 }
-

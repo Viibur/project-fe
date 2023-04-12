@@ -54,6 +54,9 @@ export class VigaKirjutaComponent implements OnInit, OnChanges {
 
   next(): void {
     this.parandatud.emit(true);
+    this.vastus = "";
+    this.proovid = 3;
+    this.oigsus = false;
   }
 
   checkVastus(): void {
