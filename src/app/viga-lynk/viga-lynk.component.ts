@@ -2,9 +2,10 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
-  EventEmitter, HostListener,
+  EventEmitter,
   Input,
-  OnChanges, OnDestroy,
+  OnChanges,
+  OnDestroy,
   Output,
   SimpleChanges
 } from '@angular/core';
@@ -64,7 +65,7 @@ export class VigaLynkComponent implements OnChanges, AfterViewInit, OnDestroy {
     if (valitud != this.viga.korrektne) {
       this.proovid = 0;
     } else {
-      this.lugerService.oige$.next(this.lugerService.oige$.value+1);
+      this.lugerService.oige$.next(this.lugerService.oige$.value + 1);
     }
   }
 

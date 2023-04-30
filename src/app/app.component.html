@@ -1,11 +1,11 @@
 <button class="btn btn-secondary infoHelper" (click)="openModal()">Info</button>
-<button class="btn btn-danger infoHelper" (click)="raporteeri()">Raporteeri lause</button>
+<button class="btn btn-danger infoHelper alumine" (click)="raporteeri()">Raporteeri lause</button>
 <div class="switchButtons">
-  <button class="btn btn-primary w-25"
+  <button class="btn btn-primary w-25 m-1"
           [disabled]="vigaKirjuta"
           (click)="changeClicked()">Kirjuta sõna korrektselt
   </button>
-  <button class="btn btn-primary w-25"
+  <button class="btn btn-primary w-25 m-1"
           [disabled]="vigaLynk"
           (click)="changeClicked()">Vali õige sõna
   </button>
