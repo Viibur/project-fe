@@ -5,6 +5,7 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {JuhendModalComponent} from "./juhend-modal/juhend-modal.component";
 import {Subscription} from "rxjs";
 import {LugerService} from "./services/luger.service";
+import {environment} from "../environments/environment";
 
 @Component({
   selector: 'app-root',
@@ -37,7 +38,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initSubscriptions();
-    this.http.get<VeanaideDTO[]>("https://projectbe-production.up.railway.app/andmed").subscribe((vead: VeanaideDTO[]) => {
+    this.http.get<VeanaideDTO[]>(environment.API_URL + "andmed").subscribe((vead: VeanaideDTO[]) => {
       this.vead = vead;
       this.findViga(this.vead.length);
     });
@@ -101,7 +102,7 @@ export class AppComponent implements OnInit, OnDestroy {
   lisaValeParandus($event: VeanaideDTO) {
     if (this.valestiParandatud.filter(viga => viga.id == $event.id).length == 0) {
       $event.sagedus = $event.sagedus + 1;
-      this.http.post<void>("https://projectbe-production.up.railway.app/muuda_andmed", [$event]).subscribe();
+      this.http.post<void>(environment.API_URL + "muuda_andmed", [$event]).subscribe();
     }
     this.valestiParandatud.push($event);
   }
@@ -118,7 +119,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   raporteeri(): void {
-    this.http.get("https://projectbe-production.up.railway.app/raporteeri/" + this.viga.id).subscribe(result => {
+    this.http.get(environment.API_URL + "raporteeri/" + this.viga.id).subscribe(result => {
       this.findNextViga(true);
     });
   }
